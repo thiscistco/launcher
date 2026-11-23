@@ -18,10 +18,10 @@
   .wallpaper { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
   .bezel { position:absolute; inset:0; border-radius:22px; border:3px solid #000; pointer-events:none; z-index:5; }
   .punch-hole { position:absolute; top:9px; left:50%; transform:translateX(-50%); width:18px; height:18px; background:radial-gradient(circle at 30% 30%,#1a1a1a 0%,#000 60%); border-radius:50%; border:1px solid #222; z-index:6; }
-  /* 5 garis MIRING DIAGONAL VERTIKAL persis seperti ventilasi di gambar */
-  .vent { position:absolute; right:14px; top:50%; transform:translateY(-45%); display:flex; flex-direction:column; gap:2px; align-items:center; z-index:7; background:rgba(0,0,0,0.25); padding:3px 2px; border-radius:3px; }
-  .vent-line { width:4px; height:14px; background:rgba(255,255,255,0.12); border-radius:1px; transform:skewY(-20deg) rotate(0deg); overflow:hidden; position:relative; }
-  .vent-line .fill { position:absolute; bottom:0; left:0; right:0; background:#FF6A00; box-shadow:0 0 4px #FF6A00; }
+  /* 5 garis SESUAI UKURAN ASLI di ventilasi kanan - persis 5 garis yang kita sepakati */
+  .vent { position:absolute; right:15px; top:51%; transform:translateY(-50%); display:flex; flex-direction:column-reverse; gap:1.5px; align-items:center; z-index:7; }
+  .vent-line { width:3.5px; height:11px; background:rgba(255,255,255,0.10); border-radius:0.5px; overflow:hidden; transform:skewY(-18deg); }
+  .vent-line .fill { width:100%; background:#FF6A00; box-shadow:0 0 4px #FF6A00; position:absolute; bottom:0; left:0; right:0; }
   .caption { margin-top:10px; color:#888; font-size:11px; text-align:center; }
   .caption b { color:#FF6A00; }
   .legend { background:#111; border:1px solid #222; border-radius:12px; padding:14px 18px; color:#888; font-size:11px; line-height:1.6; max-width:560px; text-align:center; }
@@ -31,11 +31,11 @@
 <body>
   <div class="device-info">
     <h1>Infinix GT30 Pro — Launcher Preview :3000</h1>
-    <p>5 garis miring DIAGONAL VERTIKAL di ventilasi kanan • Isi dari bawah</p>
+    <p>5 garis panjang & lebar SESUAI 5 garis ventilasi asli • 3.5px × 11px • Miring diagonal</p>
   </div>
 
   <div class="phones">
-    <!-- 5% = 1/4 garis bawah -->
+    <!-- 5% = 1/4 garis -->
     <div class="phone-wrap">
       <div class="phone">
         <div class="screen">
@@ -47,7 +47,7 @@
           <div class="bezel"></div><div class="punch-hole"></div>
         </div>
       </div>
-      <div class="caption"><b>5%</b> = 1/4 garis bawah miring</div>
+      <div class="caption"><b>5%</b> = 1/4 garis bawah</div>
     </div>
 
     <!-- 15% = 3/4 garis -->
@@ -62,7 +62,7 @@
           <div class="bezel"></div><div class="punch-hole"></div>
         </div>
       </div>
-      <div class="caption"><b>15%</b> = 3/4 garis miring</div>
+      <div class="caption"><b>15%</b> = 3/4 garis</div>
     </div>
 
     <!-- 40% = 2 garis -->
@@ -78,7 +78,7 @@
           <div class="bezel"></div><div class="punch-hole"></div>
         </div>
       </div>
-      <div class="caption"><b>40%</b> = 2 garis miring penuh</div>
+      <div class="caption"><b>40%</b> = 2 garis penuh</div>
     </div>
 
     <!-- 80% = 4 garis -->
@@ -96,13 +96,12 @@
           <div class="bezel"></div><div class="punch-hole"></div>
         </div>
       </div>
-      <div class="caption"><b>80%</b> = 4 garis miring</div>
+      <div class="caption"><b>80%</b> = 4 garis</div>
     </div>
   </div>
 
   <div class="legend">
-    <b>Sudah persis:</b> 5 garis <b>miring diagonal vertikal</b> di ventilasi kanan (seperti di gambar POWERTRAIN) • Isi dari bawah • 5% = 1/4 garis bawah oranye<br>
-    Kode Android juga akan miring diagonal vertikal sama
+    <b>SUDAH SESUAI:</b> Panjang <b>11px</b> × Lebar <b>3.5px</b> • Miring diagonal • Gap 1.5px • Persis 5 garis ventilasi POWERTRAIN di wallpaper
   </div>
 </body>
 </html>
