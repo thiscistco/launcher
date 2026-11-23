@@ -82,7 +82,7 @@ fun BatteryIndicator(
             text = "$batteryPercent%",
             modifier = Modifier.offset(
                 x = slitCenterX - 18.dp,
-                y = imageOffsetY + imageScale * 1265f - barHeight / 2f - 5.dp
+                y = imageOffsetY + imageScale * 1265f - barHeight / 2f - 10.dp
             ),
             fontSize = 8.sp,
             fontWeight = FontWeight.Bold,
@@ -100,14 +100,14 @@ fun BatteryIndicator(
                 else -> (batteryPercent - start) / 20f
             }
             val barLeft = slitCenterX - barWidth / 2f
-            val barTop = imageOffsetY + imageScale * slitCenterYs[i] - barHeight / 2f + 5.dp
+            val barTop = imageOffsetY + imageScale * slitCenterYs[i] - barHeight / 2f
 
             Canvas(
                 modifier = Modifier
                     .offset(x = barLeft, y = barTop)
                     .size(width = barWidth, height = barHeight)
             ) {
-                val endCapHeight = size.height * (20f / 63f)
+                val endCapHeight = size.height * (18f / 63f)
                 val barPath = Path().apply {
                     moveTo(0f, size.height - endCapHeight)
                     lineTo(0f, size.height)
