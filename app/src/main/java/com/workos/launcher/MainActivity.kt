@@ -109,14 +109,17 @@ fun BatteryIndicator(
 @Composable
 fun getBatteryPercent(): Int {
     val context = LocalContext.current
-    // For preview, return 15% as requested. In real device, read from BatteryManager
-    // To make it dynamic, uncomment below:
-    // val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-    // val battery = context.registerReceiver(null, filter)
-    // val level = battery?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
-    // val scale = battery?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
-    // return if (level != -1 && scale != -1) (level * 100 / scale) else 15
-    return 15 // Preview locked to 15% as requested (1 garis oranye menyala)
+    // Dynamic: baca baterai HP real via BatteryManager
+    // 15% -> 1 garis, 40% -> 2 garis, 80% -> 4 garis, dll akan langsung update
+    val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+    val battery = context.registerReceiver(null, filter)
+    val level = battery?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
+    val scale = battery?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
+    return if (level != -1 && scale != -1) {
+        (level * 100 / scale)
+    } else {
+        15 // fallback jika gagal baca
+    }
 }
 
 @Composable
