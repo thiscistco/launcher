@@ -66,25 +66,30 @@ fun BatteryIndicator(
     batteryPercent: Int,
     modifier: Modifier = Modifier
 ) {
-    // 5 garis miring, tiap garis 20% = bisa terisi sebagian
-    // 15% = 3/4 garis pertama (0.75 * 20% = 15%)
-    // 30% = 1 garis penuh + 1/2 garis kedua (20% + 10%)
-    // Di ventilasi kanan - 5 garis miring ventilasi, tiap 5% = 1/4 garis, isi dari bawah, miring sesuai aslinya
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(2.4.dp),
-        horizontalAlignment = Alignment.End
-    ) {
-        // Label persentase baterai (menggantikan HIGH PERFORMANCE) - di atas ventilasi
+    // Position each of the five battery bars over its matching lower vent slit in wallpaper v17.
+    BoxWithConstraints(modifier = modifier) {
+        val imageScale = maxOf(maxWidth / 1224f, maxHeight / 2720f)
+        val imageOffsetX = (maxWidth - imageScale * 1224f) / 2f
+        val imageOffsetY = (maxHeight - imageScale * 2720f) / 2f
+        val barWidth = imageScale * 44f
+        val barHeight = imageScale * 63f
+        val capHeight = imageScale * 20f
+        val slitCenterX = imageOffsetX + imageScale * 1123.5f
+        // Ordered from top to bottom; the battery fills upward from the lowest slit.
+        val slitCenterYs = listOf(1265f, 1316f, 1365.5f, 1415.5f, 1464.5f)
+
         Text(
             text = "$batteryPercent%",
+            modifier = Modifier.offset(
+                x = slitCenterX - 18.dp,
+                y = imageOffsetY + imageScale * 1265f - barHeight / 2f - 10.dp
+            ),
             fontSize = 8.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFFFF6A00),
             letterSpacing = 0.5.sp
         )
-        // 5 garis miring DIAGONAL VERTIKAL di ventilasi kanan - persis seperti ventilasi POWERTRAIN di gambar
-        // Isi dari bawah, tiap garis vertikal diagonal
+
         for (i in 0 until 5) {
             val bottomIndex = 4 - i
             val start = bottomIndex * 20
@@ -92,15 +97,21 @@ fun BatteryIndicator(
             val fillFraction = when {
                 batteryPercent >= end -> 1f
                 batteryPercent <= start -> 0f
-                else -> (batteryPercent - start) / 20f // 5%->0.25, 15%->0.75 bottom
+                else -> (batteryPercent - start) / 20f
             }
-            Canvas(modifier = Modifier.size(width = 8.8272.dp, height = 14.352.dp)) {
-                // Lengthened 1.2x while keeping the 3.84dp vertical end cap and diagonal angle.
-                val capHeight = size.height * (3.84f / 14.352f)
+            val barLeft = slitCenterX - barWidth / 2f
+            val barTop = imageOffsetY + imageScale * slitCenterYs[i] - barHeight / 2f
+
+            Canvas(
+                modifier = Modifier
+                    .offset(x = barLeft, y = barTop)
+                    .size(width = barWidth, height = barHeight)
+            ) {
+                val endCapHeight = size.height * (20f / 63f)
                 val barPath = Path().apply {
-                    moveTo(0f, size.height - capHeight)
+                    moveTo(0f, size.height - endCapHeight)
                     lineTo(0f, size.height)
-                    lineTo(size.width, capHeight)
+                    lineTo(size.width, endCapHeight)
                     lineTo(size.width, 0f)
                     close()
                 }
@@ -162,15 +173,10 @@ fun HomeScreen(
             contentScale = ContentScale.Crop
         )
 
-        // Battery Indicator Overlay - 5 garis di ventilasi kosong plat silver kanan
-        // Posisi tepat di ventilasi kanan (tempat 5 garis miring asli)
+        // Overlay bars are individually positioned from the matching vent-slit coordinates in wallpaper v17.
         BatteryIndicator(
             batteryPercent = batteryPercent,
-            modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .padding(end = 18.dp)
-                // Anchor the stack on the bottom bar and move it up so that bar is centered.
-                .offset(x = 4.dp, y = (-48).dp)
+            modifier = Modifier.fillMaxSize()
         )
 
         // Optional parallax overlay - subtle movement via sensor (implemented in real device)
