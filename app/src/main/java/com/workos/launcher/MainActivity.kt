@@ -79,32 +79,30 @@ fun BatteryIndicator(
             color = Color(0xFFFF6A00),
             letterSpacing = 0.5.sp
         )
-        // 5 garis miring diagonal di ventilasi - fraksional, isi dari bawah, miring
-        // Untuk miring di Compose: gunakan graphicsLayer rotation atau skew via transform
+        // 5 garis miring DIAGONAL VERTIKAL di ventilasi kanan - persis seperti ventilasi POWERTRAIN di gambar
+        // Isi dari bawah, tiap garis vertikal diagonal
         for (i in 0 until 5) {
-            // Isi dari bawah: garis bawah = 0-20%, garis atas = 80-100%
-            // Jadi index dari bawah: bottomIndex = 4 - i kalau Column biasa, tapi kita pakai columnReverse di preview
-            // Di Compose Column normal, i=0 adalah atas, jadi untuk isi dari bawah, hitung terbalik
             val bottomIndex = 4 - i
             val start = bottomIndex * 20
             val end = (bottomIndex + 1) * 20
             val fillFraction = when {
                 batteryPercent >= end -> 1f
                 batteryPercent <= start -> 0f
-                else -> (batteryPercent - start) / 20f // 5%->0.25 bottom, 15%->0.75 bottom
+                else -> (batteryPercent - start) / 20f // 5%->0.25, 15%->0.75 bottom
             }
             Box(
                 modifier = Modifier
-                    .width(18.dp)
-                    .height(2.5.dp)
+                    .width(4.dp)
+                    .height(14.dp)
                     .clip(RoundedCornerShape(1.dp))
                     .background(Color.White.copy(alpha = 0.12f))
             ) {
                 if (fillFraction > 0f) {
                     Box(
                         modifier = Modifier
-                            .fillMaxHeight()
-                            .fillMaxWidth(fillFraction)
+                            .fillMaxWidth()
+                            .fillMaxHeight(fillFraction)
+                            .align(Alignment.BottomCenter)
                             .background(Color(0xFFFF6A00))
                     )
                 }
