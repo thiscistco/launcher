@@ -168,8 +168,9 @@ fun HomeScreen(
             batteryPercent = batteryPercent,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .padding(end = 18.dp, top = 30.dp)
-                .offset(x = 4.dp, y = (-8).dp)
+                .padding(end = 18.dp)
+                // Anchor the stack on the bottom bar and move it up so that bar is centered.
+                .offset(x = 4.dp, y = (-40).dp)
         )
 
         // Optional parallax overlay - subtle movement via sensor (implemented in real device)
