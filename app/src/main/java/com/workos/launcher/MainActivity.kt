@@ -62,16 +62,9 @@ fun BatteryIndicator(
     batteryPercent: Int,
     modifier: Modifier = Modifier
 ) {
-    // 5 garis miring, tiap garis 20%, oranye menyala sesuai baterai
-    // 15% = 1 garis menyala (karena 15% < 20% tapi minimal 1 untuk low battery warning)
-    val activeLines = when {
-        batteryPercent >= 100 -> 5
-        batteryPercent >= 80 -> 4
-        batteryPercent >= 60 -> 3
-        batteryPercent >= 40 -> 2
-        batteryPercent >= 1 -> 1  // 1-39% tetap 1 garis (low battery)
-        else -> 0
-    }
+    // 5 garis miring, tiap garis 20% = bisa terisi sebagian
+    // 15% = 3/4 garis pertama (0.75 * 20% = 15%)
+    // 30% = 1 garis penuh + 1/2 garis kedua (20% + 10%)
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(3.dp),
@@ -84,18 +77,31 @@ fun BatteryIndicator(
             color = Color(0xFFFF6A00),
             letterSpacing = 0.5.sp
         )
-        // 5 garis miring diagonal
+        // 5 garis miring diagonal dengan fill fraksional
         for (i in 0 until 5) {
-            val isActive = i < activeLines
+            val start = i * 20
+            val end = (i + 1) * 20
+            val fillFraction = when {
+                batteryPercent >= end -> 1f // penuh
+                batteryPercent <= start -> 0f // kosong
+                else -> (batteryPercent - start) / 20f // sebagian: 15% -> 0.75, 30% -> 0.5 untuk garis kedua
+            }
             Box(
                 modifier = Modifier
                     .width(28.dp)
                     .height(3.dp)
                     .clip(RoundedCornerShape(1.dp))
-                    .background(
-                        if (isActive) Color(0xFFFF6A00) else Color.White.copy(alpha = 0.15f)
+                    .background(Color.White.copy(alpha = 0.15f))
+            ) {
+                if (fillFraction > 0f) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .fillMaxWidth(fillFraction)
+                            .background(Color(0xFFFF6A00))
                     )
-            )
+                }
+            }
         }
         Text(
             text = "BATTERY",
