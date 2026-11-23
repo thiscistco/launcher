@@ -94,9 +94,9 @@ fun BatteryIndicator(
                 batteryPercent <= start -> 0f
                 else -> (batteryPercent - start) / 20f // 5%->0.25, 15%->0.75 bottom
             }
-            Canvas(modifier = Modifier.size(width = 7.356.dp, height = 12.6.dp)) {
-                // Vertical end caps with diagonal sides, matching the preview's clipped parallelogram.
-                val capHeight = size.height * (3.2f / 10.5f)
+            Canvas(modifier = Modifier.size(width = 8.8272.dp, height = 14.352.dp)) {
+                // Lengthened 1.2x while keeping the 3.84dp vertical end cap and diagonal angle.
+                val capHeight = size.height * (3.84f / 14.352f)
                 val barPath = Path().apply {
                     moveTo(0f, size.height - capHeight)
                     lineTo(0f, size.height)
