@@ -161,7 +161,7 @@ fun HomeScreen(
             batteryPercent = batteryPercent,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .padding(end = 10.dp, top = 30.dp)
+                .padding(end = 12.dp, top = 30.dp)
         )
 
         // Optional parallax overlay - subtle movement via sensor (implemented in real device)
