@@ -93,7 +93,7 @@ fun BatteryIndicator(
             Box(
                 modifier = Modifier
                     .width(8.dp)
-                    .height(11.dp)
+                    .height(13.dp)
                     .clip(RoundedCornerShape(0.5.dp))
                     .background(Color.White.copy(alpha = 0.10f))
             ) {
@@ -161,7 +161,7 @@ fun HomeScreen(
             batteryPercent = batteryPercent,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .padding(end = 14.dp, top = 30.dp)
+                .padding(end = 10.dp, top = 30.dp)
         )
 
         // Optional parallax overlay - subtle movement via sensor (implemented in real device)
