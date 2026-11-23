@@ -18,10 +18,10 @@
   .wallpaper { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
   .bezel { position:absolute; inset:0; border-radius:22px; border:3px solid #000; pointer-events:none; z-index:5; }
   .punch-hole { position:absolute; top:9px; left:50%; transform:translateX(-50%); width:18px; height:18px; background:radial-gradient(circle at 30% 30%,#1a1a1a 0%,#000 60%); border-radius:50%; border:1px solid #222; z-index:6; }
-  /* 5 garis LEBIH LEBAR KE KIRI - sesuai 5 garis ventilasi asli */
-  .vent { position:absolute; right:10px; top:51%; transform:translateY(-50%); display:flex; flex-direction:column-reverse; gap:1.5px; align-items:center; z-index:7; }
-  .vent-line { width:8px; height:13px; background:rgba(255,255,255,0.10); border-radius:0.5px; overflow:hidden; transform:skewY(-18deg); }
-  .vent-line .fill { width:100%; background:#FF6A00; box-shadow:0 0 4px #FF6A00; position:absolute; bottom:0; left:0; right:0; }
+  /* Battery Bar MENGIKUTI 5 GARIS VENTILASI - persis seperti di gambar POWERTRAIN */
+  .vent-battery { position:absolute; right:16px; top:50%; transform:translateY(-44%); display:flex; flex-direction:column-reverse; gap:1.2px; z-index:7; }
+  .vent-line { width:3.8px; height:9.5px; background:#1a1a1a; border-radius:0.5px; overflow:hidden; transform:skewY(-15deg); border:0.5px solid #2a2a2a; position:relative; }
+  .vent-line .fill { position:absolute; bottom:0; left:0; right:0; background:#FF6A00; box-shadow:0 0 3px #FF6A00; }
   .caption { margin-top:10px; color:#888; font-size:11px; text-align:center; }
   .caption b { color:#FF6A00; }
   .legend { background:#111; border:1px solid #222; border-radius:12px; padding:14px 18px; color:#888; font-size:11px; line-height:1.6; max-width:560px; text-align:center; }
@@ -31,7 +31,7 @@
 <body>
   <div class="device-info">
     <h1>Infinix GT30 Pro — Launcher Preview :3000</h1>
-    <p>5 garis LEBIH LEBAR KE KIRI • 5px × 11px • Sesuai ventilasi POWERTRAIN</p>
+    <p>Bar baterai MENGIKUTI 5 garis ventilasi POWERTRAIN • Desain ulang persis seperti gambar</p>
   </div>
 
   <div class="phones">
@@ -40,14 +40,14 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
-          <div class="vent">
+          <div class="vent-battery">
             <div class="vent-line"><div class="fill" style="height:25%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
           </div>
           <div class="bezel"></div><div class="punch-hole"></div>
         </div>
       </div>
-      <div class="caption"><b>5%</b> = 1/4 garis bawah</div>
+      <div class="caption"><b>5%</b> = 1/4 garis ventilasi</div>
     </div>
 
     <!-- 15% = 3/4 garis -->
@@ -55,7 +55,7 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
-          <div class="vent">
+          <div class="vent-battery">
             <div class="vent-line"><div class="fill" style="height:75%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
           </div>
@@ -70,7 +70,7 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
-          <div class="vent">
+          <div class="vent-battery">
             <div class="vent-line"><div class="fill" style="height:100%"></div></div>
             <div class="vent-line"><div class="fill" style="height:100%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
@@ -78,30 +78,30 @@
           <div class="bezel"></div><div class="punch-hole"></div>
         </div>
       </div>
-      <div class="caption"><b>40%</b> = 2 garis penuh</div>
+      <div class="caption"><b>40%</b> = 2 garis ventilasi</div>
     </div>
 
-    <!-- 80% = 4 garis -->
+    <!-- 100% = 5 garis -->
     <div class="phone-wrap">
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
-          <div class="vent">
+          <div class="vent-battery">
             <div class="vent-line"><div class="fill" style="height:100%"></div></div>
             <div class="vent-line"><div class="fill" style="height:100%"></div></div>
             <div class="vent-line"><div class="fill" style="height:100%"></div></div>
             <div class="vent-line"><div class="fill" style="height:100%"></div></div>
-            <div class="vent-line"></div>
+            <div class="vent-line"><div class="fill" style="height:100%"></div></div>
           </div>
           <div class="bezel"></div><div class="punch-hole"></div>
         </div>
       </div>
-      <div class="caption"><b>80%</b> = 4 garis</div>
+      <div class="caption"><b>100%</b> = 5 garis penuh</div>
     </div>
   </div>
 
   <div class="legend">
-    <b>LEBIH LEBAR KE KIRI:</b> Lebar <b>5px</b> (dari 3.5px) • Lebih menutupi ventilasi • Isi dari bawah
+    <b>DESAIN ULANG:</b> Bar baterai sekarang <b>mengikuti 5 garis ventilasi POWERTRAIN</b> persis seperti di gambar • 3.8px × 9.5px • Miring diagonal • Isi dari bawah
   </div>
 </body>
 </html>
