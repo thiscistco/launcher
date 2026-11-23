@@ -92,7 +92,7 @@ fun BatteryIndicator(
             }
             Box(
                 modifier = Modifier
-                    .width(5.dp)
+                    .width(6.5.dp)
                     .height(11.dp)
                     .clip(RoundedCornerShape(0.5.dp))
                     .background(Color.White.copy(alpha = 0.10f))
