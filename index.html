@@ -18,10 +18,10 @@
   .wallpaper { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
   .bezel { position:absolute; inset:0; border-radius:22px; border:3px solid #000; pointer-events:none; z-index:5; }
   .punch-hole { position:absolute; top:9px; left:50%; transform:translateX(-50%); width:18px; height:18px; background:radial-gradient(circle at 30% 30%,#1a1a1a 0%,#000 60%); border-radius:50%; border:1px solid #222; z-index:6; }
-  /* Battery Bar MENGIKUTI 5 GARIS VENTILASI - persis seperti di gambar POWERTRAIN */
-  .vent-battery { position:absolute; right:16px; top:50%; transform:translateY(-44%); display:flex; flex-direction:column-reverse; gap:1.2px; z-index:7; }
-  .vent-line { width:3.8px; height:9.5px; background:#1a1a1a; border-radius:0.5px; overflow:hidden; transform:skewY(-15deg); border:0.5px solid #2a2a2a; position:relative; }
-  .vent-line .fill { position:absolute; bottom:0; left:0; right:0; background:#FF6A00; box-shadow:0 0 3px #FF6A00; }
+  /* Bar baterai UKURAN & KEMIRINGAN SESUAI 5 GARIS MIRING ASLI - persis ventilasi POWERTRAIN */
+  .vent-battery { position:absolute; right:16px; top:50%; transform:translateY(-44%); display:flex; flex-direction:column-reverse; gap:2px; z-index:7; }
+  .vent-line { width:3.2px; height:10.5px; background:#0a0a0a; border-radius:0.5px; overflow:hidden; transform:skewX(-28deg); border:0.5px solid #1a1a1a; position:relative; }
+  .vent-line .fill { position:absolute; bottom:0; left:0; right:0; background:#FF6A00; box-shadow:0 0 4px #FF6A00; }
   .caption { margin-top:10px; color:#888; font-size:11px; text-align:center; }
   .caption b { color:#FF6A00; }
   .legend { background:#111; border:1px solid #222; border-radius:12px; padding:14px 18px; color:#888; font-size:11px; line-height:1.6; max-width:560px; text-align:center; }
@@ -31,7 +31,7 @@
 <body>
   <div class="device-info">
     <h1>Infinix GT30 Pro — Launcher Preview :3000</h1>
-    <p>Bar baterai MENGIKUTI 5 garis ventilasi POWERTRAIN • Desain ulang persis seperti gambar</p>
+    <p>Bar baterai ukuran & kemiringan SESUAI 5 garis miring ventilasi POWERTRAIN</p>
   </div>
 
   <div class="phones">
@@ -47,7 +47,7 @@
           <div class="bezel"></div><div class="punch-hole"></div>
         </div>
       </div>
-      <div class="caption"><b>5%</b> = 1/4 garis ventilasi</div>
+      <div class="caption"><b>5%</b> = 1/4 garis miring</div>
     </div>
 
     <!-- 15% = 3/4 garis -->
@@ -78,7 +78,7 @@
           <div class="bezel"></div><div class="punch-hole"></div>
         </div>
       </div>
-      <div class="caption"><b>40%</b> = 2 garis ventilasi</div>
+      <div class="caption"><b>40%</b> = 2 garis</div>
     </div>
 
     <!-- 100% = 5 garis -->
@@ -101,7 +101,7 @@
   </div>
 
   <div class="legend">
-    <b>DESAIN ULANG:</b> Bar baterai sekarang <b>mengikuti 5 garis ventilasi POWERTRAIN</b> persis seperti di gambar • 3.8px × 9.5px • Miring diagonal • Isi dari bawah
+    <b>SESUAI ASLI:</b> Bar baterai <b>3.2px × 10.5px • Miring -28deg</b> persis 5 garis miring ventilasi POWERTRAIN di gambar
   </div>
 </body>
 </html>
