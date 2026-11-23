@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.sp
 import com.workos.launcher.ui.theme.WorkOSTheme
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.IntentFilter
+import android.os.BatteryManager
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +58,68 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun BatteryIndicator(
+    batteryPercent: Int,
+    modifier: Modifier = Modifier
+) {
+    // 5 garis miring, tiap garis 20%, oranye menyala sesuai baterai
+    // 15% = 1 garis menyala (karena 15% < 20% tapi minimal 1 untuk low battery warning)
+    val activeLines = when {
+        batteryPercent >= 100 -> 5
+        batteryPercent >= 80 -> 4
+        batteryPercent >= 60 -> 3
+        batteryPercent >= 40 -> 2
+        batteryPercent >= 1 -> 1  // 1-39% tetap 1 garis (low battery)
+        else -> 0
+    }
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(3.dp),
+        horizontalAlignment = Alignment.End
+    ) {
+        Text(
+            text = "$batteryPercent%",
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFFFF6A00),
+            letterSpacing = 0.5.sp
+        )
+        // 5 garis miring diagonal
+        for (i in 0 until 5) {
+            val isActive = i < activeLines
+            Box(
+                modifier = Modifier
+                    .width(28.dp)
+                    .height(3.dp)
+                    .clip(RoundedCornerShape(1.dp))
+                    .background(
+                        if (isActive) Color(0xFFFF6A00) else Color.White.copy(alpha = 0.15f)
+                    )
+            )
+        }
+        Text(
+            text = "BATTERY",
+            fontSize = 7.sp,
+            letterSpacing = 1.sp,
+            color = Color.White.copy(alpha = 0.5f)
+        )
+    }
+}
+
+@Composable
+fun getBatteryPercent(): Int {
+    val context = LocalContext.current
+    // For preview, return 15% as requested. In real device, read from BatteryManager
+    // To make it dynamic, uncomment below:
+    // val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+    // val battery = context.registerReceiver(null, filter)
+    // val level = battery?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
+    // val scale = battery?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
+    // return if (level != -1 && scale != -1) (level * 100 / scale) else 15
+    return 15 // Preview locked to 15% as requested (1 garis oranye menyala)
+}
+
+@Composable
 fun HomeScreen(
     onOpenSuperApp: () -> Unit,
     onOpenSettings: () -> Unit
@@ -63,6 +127,7 @@ fun HomeScreen(
     val context = LocalContext.current
     var parallaxEnabled by remember { mutableStateOf(true) }
     var searchQuery by remember { mutableStateOf("") }
+    val batteryPercent = getBatteryPercent()
 
     // Get installed apps for drawer
     val launcherApps = remember {
@@ -82,10 +147,18 @@ fun HomeScreen(
             contentScale = ContentScale.Crop
         )
 
+        // Battery Indicator Overlay - 5 garis miring oranye sesuai baterai (15% = 1 garis)
+        // Posisikan di kanan atas, menggantikan HIGH PERFORMANCE label di wallpaper
+        BatteryIndicator(
+            batteryPercent = batteryPercent,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(top = 48.dp, end = 18.dp)
+        )
+
         // Optional parallax overlay - subtle movement via sensor (implemented in real device)
         if (parallaxEnabled) {
             // Parallax layer would be handled with gyroscope in full build
-            // For now static with slight blur for depth
         }
 
         // Status bar spacer (hidden per user request - no status bar)
