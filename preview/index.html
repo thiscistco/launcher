@@ -20,8 +20,8 @@
   .punch-hole { position:absolute; top:9px; left:50%; transform:translateX(-50%); width:18px; height:18px; background:radial-gradient(circle at 30% 30%,#1a1a1a 0%,#000 60%); border-radius:50%; border:1px solid #222; z-index:6; }
   /* Bar baterai UKURAN & KEMIRINGAN SESUAI 5 GARIS MIRING ASLI - persis ventilasi POWERTRAIN */
   .vent-battery { position:absolute; right:25px; top:50%; transform:translateY(-44%); display:flex; flex-direction:column-reverse; gap:2px; z-index:7; }
-  .vent-line { width:3.2px; height:10.5px; background:#0a0a0a; border-radius:0.5px; overflow:hidden; transform:skewX(-40deg); border:0.5px solid #1a1a1a; position:relative; }
-  .vent-line .fill { position:absolute; bottom:0; left:0; right:0; background:#FF6A00; box-shadow:0 0 4px #FF6A00; }
+  .vent-line { width:6.13px; height:10.5px; background:#0a0a0a; overflow:hidden; clip-path:polygon(0 69.5%, 0 100%, 100% 30.5%, 100% 0); position:relative; }
+  .vent-line .fill { position:absolute; top:0; bottom:0; left:0; background:#FF6A00; box-shadow:0 0 4px #FF6A00; }
   .caption { margin-top:10px; color:#888; font-size:11px; text-align:center; }
   .caption b { color:#FF6A00; }
   .legend { background:#111; border:1px solid #222; border-radius:12px; padding:14px 18px; color:#888; font-size:11px; line-height:1.6; max-width:560px; text-align:center; }
@@ -41,7 +41,7 @@
         <div class="screen">
           <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
           <div class="vent-battery">
-            <div class="vent-line"><div class="fill" style="height:25%"></div></div>
+            <div class="vent-line"><div class="fill" style="width:25%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
           </div>
           <div class="bezel"></div><div class="punch-hole"></div>
@@ -56,7 +56,7 @@
         <div class="screen">
           <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
           <div class="vent-battery">
-            <div class="vent-line"><div class="fill" style="height:75%"></div></div>
+            <div class="vent-line"><div class="fill" style="width:75%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
           </div>
           <div class="bezel"></div><div class="punch-hole"></div>
@@ -71,8 +71,8 @@
         <div class="screen">
           <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
           <div class="vent-battery">
-            <div class="vent-line"><div class="fill" style="height:100%"></div></div>
-            <div class="vent-line"><div class="fill" style="height:100%"></div></div>
+            <div class="vent-line"><div class="fill" style="width:100%"></div></div>
+            <div class="vent-line"><div class="fill" style="width:100%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
           </div>
           <div class="bezel"></div><div class="punch-hole"></div>
@@ -87,11 +87,11 @@
         <div class="screen">
           <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
           <div class="vent-battery">
-            <div class="vent-line"><div class="fill" style="height:100%"></div></div>
-            <div class="vent-line"><div class="fill" style="height:100%"></div></div>
-            <div class="vent-line"><div class="fill" style="height:100%"></div></div>
-            <div class="vent-line"><div class="fill" style="height:100%"></div></div>
-            <div class="vent-line"><div class="fill" style="height:100%"></div></div>
+            <div class="vent-line"><div class="fill" style="width:100%"></div></div>
+            <div class="vent-line"><div class="fill" style="width:100%"></div></div>
+            <div class="vent-line"><div class="fill" style="width:100%"></div></div>
+            <div class="vent-line"><div class="fill" style="width:100%"></div></div>
+            <div class="vent-line"><div class="fill" style="width:100%"></div></div>
           </div>
           <div class="bezel"></div><div class="punch-hole"></div>
         </div>
@@ -101,7 +101,7 @@
   </div>
 
   <div class="legend">
-    <b>SESUAI ASLI:</b> Bar baterai <b>3.2px × 10.5px • Miring -28deg</b> persis 5 garis miring ventilasi POWERTRAIN di gambar
+    <b>SESUAI ASLI:</b> Ujung tiap bar <b>vertikal, bukan horizontal</b>; badan tetap diagonal mengikuti ventilasi POWERTRAIN, dengan isi mulai dari ujung bawah
   </div>
 </body>
 </html>

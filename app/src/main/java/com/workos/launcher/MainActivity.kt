@@ -5,6 +5,7 @@ import android.content.pm.LauncherApps
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,8 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -91,23 +94,24 @@ fun BatteryIndicator(
                 batteryPercent <= start -> 0f
                 else -> (batteryPercent - start) / 20f // 5%->0.25, 15%->0.75 bottom
             }
-            Box(
-                modifier = Modifier
-                    .width(3.2.dp) // preview uses skewX(-40deg)
-                    .height(10.5.dp)
-                    // Visual equivalent of CSS skewX(-40deg); Compose uses y-down rotation coordinates.
-                    .graphicsLayer { rotationZ = 40f }
-                    .clip(RoundedCornerShape(0.5.dp))
-                    .background(Color.White.copy(alpha = 0.10f))
-            ) {
+            Canvas(modifier = Modifier.size(width = 6.13.dp, height = 10.5.dp)) {
+                // Vertical end caps with diagonal sides, matching the preview's clipped parallelogram.
+                val capHeight = size.height * (3.2f / 10.5f)
+                val barPath = Path().apply {
+                    moveTo(0f, size.height - capHeight)
+                    lineTo(0f, size.height)
+                    lineTo(size.width, capHeight)
+                    lineTo(size.width, 0f)
+                    close()
+                }
+                drawPath(barPath, Color.White.copy(alpha = 0.10f))
                 if (fillFraction > 0f) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(fillFraction)
-                            .align(Alignment.BottomCenter)
-                            .background(Color(0xFFFF6A00))
-                    )
+                    clipPath(barPath) {
+                        drawRect(
+                            color = Color(0xFFFF6A00),
+                            size = Size(width = size.width * fillFraction, height = size.height)
+                        )
+                    }
                 }
             }
         }
