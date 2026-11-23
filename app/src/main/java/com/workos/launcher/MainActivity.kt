@@ -65,33 +65,35 @@ fun BatteryIndicator(
     // 5 garis miring, tiap garis 20% = bisa terisi sebagian
     // 15% = 3/4 garis pertama (0.75 * 20% = 15%)
     // 30% = 1 garis penuh + 1/2 garis kedua (20% + 10%)
+    // Di ventilasi kanan - 5 garis miring ventilasi, tiap 5% = 1/4 garis
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(3.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp),
         horizontalAlignment = Alignment.End
     ) {
+        // Label persentase baterai (menggantikan HIGH PERFORMANCE)
         Text(
             text = "$batteryPercent%",
-            fontSize = 10.sp,
+            fontSize = 8.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFFFF6A00),
             letterSpacing = 0.5.sp
         )
-        // 5 garis miring diagonal dengan fill fraksional
+        // 5 garis miring diagonal di ventilasi - fraksional
         for (i in 0 until 5) {
             val start = i * 20
             val end = (i + 1) * 20
             val fillFraction = when {
-                batteryPercent >= end -> 1f // penuh
-                batteryPercent <= start -> 0f // kosong
-                else -> (batteryPercent - start) / 20f // sebagian: 15% -> 0.75, 30% -> 0.5 untuk garis kedua
+                batteryPercent >= end -> 1f
+                batteryPercent <= start -> 0f
+                else -> (batteryPercent - start) / 20f // 5%->0.25, 10%->0.5, 15%->0.75
             }
             Box(
                 modifier = Modifier
-                    .width(28.dp)
-                    .height(3.dp)
+                    .width(18.dp)
+                    .height(2.5.dp)
                     .clip(RoundedCornerShape(1.dp))
-                    .background(Color.White.copy(alpha = 0.15f))
+                    .background(Color.White.copy(alpha = 0.12f))
             ) {
                 if (fillFraction > 0f) {
                     Box(
@@ -103,12 +105,6 @@ fun BatteryIndicator(
                 }
             }
         }
-        Text(
-            text = "BATTERY",
-            fontSize = 7.sp,
-            letterSpacing = 1.sp,
-            color = Color.White.copy(alpha = 0.5f)
-        )
     }
 }
 
@@ -156,13 +152,13 @@ fun HomeScreen(
             contentScale = ContentScale.Crop
         )
 
-        // Battery Indicator Overlay - 5 garis miring oranye sesuai baterai (15% = 1 garis)
-        // Posisikan di kanan atas, menggantikan HIGH PERFORMANCE label di wallpaper
+        // Battery Indicator Overlay - 5 garis di ventilasi kosong plat silver kanan
+        // Posisi tepat di ventilasi kanan (tempat 5 garis miring asli)
         BatteryIndicator(
             batteryPercent = batteryPercent,
             modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(top = 48.dp, end = 18.dp)
+                .align(Alignment.CenterEnd)
+                .padding(end = 14.dp, top = 30.dp)
         )
 
         // Optional parallax overlay - subtle movement via sensor (implemented in real device)
