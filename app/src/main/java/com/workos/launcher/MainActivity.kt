@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -92,8 +93,10 @@ fun BatteryIndicator(
             }
             Box(
                 modifier = Modifier
-                    .width(3.2.dp)
+                    .width(3.2.dp) // preview uses skewX(-15deg)
                     .height(10.5.dp)
+                    // Visual equivalent of CSS skewX(-15deg); Compose uses y-down rotation coordinates.
+                    .graphicsLayer { rotationZ = 15f }
                     .clip(RoundedCornerShape(0.5.dp))
                     .background(Color.White.copy(alpha = 0.10f))
             ) {
