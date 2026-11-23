@@ -70,17 +70,19 @@ fun BatteryIndicator(
     BoxWithConstraints(modifier = modifier) {
         val imageScale = maxOf(maxWidth / 1224f, maxHeight / 2720f)
         val imageOffsetX = (maxWidth - imageScale * 1224f) / 2f
+        val imageOffsetY = (maxHeight - imageScale * 2720f) / 2f
         val barWidth = imageScale * 44f
         val barHeight = imageScale * 63f
+        val capHeight = imageScale * 20f
         val slitCenterX = imageOffsetX + imageScale * 1123.5f
-        // Match the preview: zero gap, with the bottom bar's center at 290px of the 638px screen.
-        val bottomBarCenterY = maxHeight * (290f / 638f)
+        // Ordered from top to bottom; the battery fills upward from the lowest slit.
+        val slitCenterYs = listOf(1265f, 1316f, 1365.5f, 1415.5f, 1464.5f)
 
         Text(
             text = "$batteryPercent%",
             modifier = Modifier.offset(
                 x = slitCenterX - 18.dp,
-                y = bottomBarCenterY - barHeight / 2f - 4f * barHeight - 10.dp
+                y = imageOffsetY + imageScale * 1265f - barHeight / 2f - 10.dp
             ),
             fontSize = 8.sp,
             fontWeight = FontWeight.Bold,
@@ -98,7 +100,7 @@ fun BatteryIndicator(
                 else -> (batteryPercent - start) / 20f
             }
             val barLeft = slitCenterX - barWidth / 2f
-            val barTop = bottomBarCenterY - barHeight / 2f - bottomIndex * barHeight
+            val barTop = imageOffsetY + imageScale * slitCenterYs[i] - barHeight / 2f
 
             Canvas(
                 modifier = Modifier
