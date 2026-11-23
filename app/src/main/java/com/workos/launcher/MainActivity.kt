@@ -107,7 +107,7 @@ fun BatteryIndicator(
                     .offset(x = barLeft, y = barTop)
                     .size(width = barWidth, height = barHeight)
             ) {
-                val endCapHeight = size.height * (13f / 63f)
+                val endCapHeight = size.height * (12.384f / 63f)
                 val barPath = Path().apply {
                     moveTo(0f, size.height - endCapHeight)
                     lineTo(0f, size.height)
