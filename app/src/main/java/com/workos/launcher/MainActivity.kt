@@ -93,10 +93,10 @@ fun BatteryIndicator(
             }
             Box(
                 modifier = Modifier
-                    .width(3.2.dp) // preview uses skewX(-45deg)
+                    .width(3.2.dp) // preview uses skewX(-40deg)
                     .height(10.5.dp)
-                    // Visual equivalent of CSS skewX(-45deg); Compose uses y-down rotation coordinates.
-                    .graphicsLayer { rotationZ = 45f }
+                    // Visual equivalent of CSS skewX(-40deg); Compose uses y-down rotation coordinates.
+                    .graphicsLayer { rotationZ = 40f }
                     .clip(RoundedCornerShape(0.5.dp))
                     .background(Color.White.copy(alpha = 0.10f))
             ) {
