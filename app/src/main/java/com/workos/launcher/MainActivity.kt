@@ -65,13 +65,13 @@ fun BatteryIndicator(
     // 5 garis miring, tiap garis 20% = bisa terisi sebagian
     // 15% = 3/4 garis pertama (0.75 * 20% = 15%)
     // 30% = 1 garis penuh + 1/2 garis kedua (20% + 10%)
-    // Di ventilasi kanan - 5 garis miring ventilasi, tiap 5% = 1/4 garis
+    // Di ventilasi kanan - 5 garis miring ventilasi, tiap 5% = 1/4 garis, isi dari bawah, miring sesuai aslinya
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(2.dp),
         horizontalAlignment = Alignment.End
     ) {
-        // Label persentase baterai (menggantikan HIGH PERFORMANCE)
+        // Label persentase baterai (menggantikan HIGH PERFORMANCE) - di atas ventilasi
         Text(
             text = "$batteryPercent%",
             fontSize = 8.sp,
@@ -79,14 +79,19 @@ fun BatteryIndicator(
             color = Color(0xFFFF6A00),
             letterSpacing = 0.5.sp
         )
-        // 5 garis miring diagonal di ventilasi - fraksional
+        // 5 garis miring diagonal di ventilasi - fraksional, isi dari bawah, miring
+        // Untuk miring di Compose: gunakan graphicsLayer rotation atau skew via transform
         for (i in 0 until 5) {
-            val start = i * 20
-            val end = (i + 1) * 20
+            // Isi dari bawah: garis bawah = 0-20%, garis atas = 80-100%
+            // Jadi index dari bawah: bottomIndex = 4 - i kalau Column biasa, tapi kita pakai columnReverse di preview
+            // Di Compose Column normal, i=0 adalah atas, jadi untuk isi dari bawah, hitung terbalik
+            val bottomIndex = 4 - i
+            val start = bottomIndex * 20
+            val end = (bottomIndex + 1) * 20
             val fillFraction = when {
                 batteryPercent >= end -> 1f
                 batteryPercent <= start -> 0f
-                else -> (batteryPercent - start) / 20f // 5%->0.25, 10%->0.5, 15%->0.75
+                else -> (batteryPercent - start) / 20f // 5%->0.25 bottom, 15%->0.75 bottom
             }
             Box(
                 modifier = Modifier

@@ -4,51 +4,101 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<title>Infinix GT30 Pro - Real Preview</title>
+<title>Infinix GT30 Pro - Launcher Preview :3000</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#050505; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; font-family:system-ui,sans-serif; }
-  .device-info { text-align:center; margin-bottom:22px; }
+  body { background:#050505; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; font-family:system-ui,sans-serif; gap:20px; }
+  .device-info { text-align:center; }
   .device-info h1 { color:#fff; font-size:14px; letter-spacing:2.5px; text-transform:uppercase; font-weight:700; }
   .device-info p { color:#666; font-size:11px; letter-spacing:1px; margin-top:6px; }
-  .phone { width:322px; height:696px; background:#0a0a0a; border-radius:28px; padding:6px; box-shadow:0 0 0 1px #2a2a2a, 0 0 0 3px #000, 0 24px 64px rgba(0,0,0,0.85), inset 0 1px 1px rgba(255,255,255,0.1); position:relative; }
-  .phone::before { content:''; position:absolute; inset:0; border-radius:28px; padding:1px; background:linear-gradient(180deg,#3a3a3a 0%,#1a1a1a 50%,#2a2a2a 100%); -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:0.6; pointer-events:none; }
+  .phones { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; }
+  .phone-wrap { text-align:center; }
+  .phone { width:300px; height:650px; background:#0a0a0a; border-radius:28px; padding:6px; box-shadow:0 0 0 1px #2a2a2a, 0 0 0 3px #000, 0 24px 64px rgba(0,0,0,0.85); position:relative; }
   .screen { width:100%; height:100%; background:#000; border-radius:22px; overflow:hidden; position:relative; }
-  .bezel { position:absolute; inset:0; border-radius:22px; border:3px solid #000; pointer-events:none; z-index:5; }
-  .bezel::after { content:''; position:absolute; bottom:0; left:0; right:0; height:6px; background:#000; border-radius:0 0 22px 22px; }
-  .punch-hole { position:absolute; top:9px; left:50%; transform:translateX(-50%); width:18px; height:18px; background:radial-gradient(circle at 30% 30%,#1a1a1a 0%,#000 60%); border-radius:50%; border:1px solid #222; z-index:6; box-shadow:inset 0 1px 2px rgba(255,255,255,0.15),0 1px 4px rgba(0,0,0,0.8); }
-  .punch-hole::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:10px; height:10px; background:radial-gradient(circle,#0f1a2a 0%,#000 70%); border-radius:50%; border:1px solid #1a2a44; }
   .wallpaper { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
-  .label { margin-top:18px; text-align:center; }
-  .label-title { color:#aaa; font-size:11px; letter-spacing:1.8px; text-transform:uppercase; }
-  .label-sub { color:#444; font-size:10px; margin-top:6px; }
-  .specs { margin-top:20px; display:flex; gap:16px; color:#555; font-size:10px; letter-spacing:0.8px; text-transform:uppercase; }
-  .specs span { display:flex; align-items:center; gap:6px; }
-  .dot { width:4px; height:4px; background:#444; border-radius:50%; }
+  .bezel { position:absolute; inset:0; border-radius:22px; border:3px solid #000; pointer-events:none; z-index:5; }
+  .punch-hole { position:absolute; top:9px; left:50%; transform:translateX(-50%); width:18px; height:18px; background:radial-gradient(circle at 30% 30%,#1a1a1a 0%,#000 60%); border-radius:50%; border:1px solid #222; z-index:6; }
+  /* 5 garis miring di ventilasi kanan - isi dari bawah, miring sesuai aslinya */
+  .vent { position:absolute; right:12px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column-reverse; gap:3px; align-items:flex-end; z-index:7; }
+  .line { width:18px; height:2.5px; background:rgba(255,255,255,0.12); border-radius:1px; overflow:hidden; transform: skewX(-20deg); }
+  .fill { height:100%; background:#FF6A00; box-shadow:0 0 4px #FF6A00; }
+  .caption { margin-top:10px; color:#888; font-size:11px; text-align:center; }
+  .caption b { color:#FF6A00; }
+  .legend { background:#111; border:1px solid #222; border-radius:12px; padding:14px 18px; color:#888; font-size:11px; line-height:1.6; max-width:560px; text-align:center; }
+  .legend b { color:#fff; }
 </style>
 </head>
 <body>
   <div class="device-info">
-    <h1>Infinix GT30 Pro</h1>
-    <p>6.78" 1.5K AMOLED • 144Hz • Wallpaper Full Screen</p>
+    <h1>Infinix GT30 Pro — Launcher Preview :3000</h1>
+    <p>5 garis miring di ventilasi kanan • Isi dari bawah • 5% = 1/4 garis bawah</p>
   </div>
-  <div class="phone">
-    <div class="screen">
-      <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
-      <div class="bezel"></div>
-      <div class="punch-hole"></div>
+
+  <div class="phones">
+    <!-- 5% = 1/4 garis bawah -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen">
+          <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
+          <div class="vent">
+            <div class="line"><div class="fill" style="width:25%"></div></div>
+            <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+          </div>
+          <div class="bezel"></div><div class="punch-hole"></div>
+        </div>
+      </div>
+      <div class="caption"><b>5%</b> = 1/4 garis bawah miring</div>
+    </div>
+
+    <!-- 10% = 1/2 garis bawah -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen">
+          <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
+          <div class="vent">
+            <div class="line"><div class="fill" style="width:50%"></div></div>
+            <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+          </div>
+          <div class="bezel"></div><div class="punch-hole"></div>
+        </div>
+      </div>
+      <div class="caption"><b>10%</b> = 1/2 garis bawah</div>
+    </div>
+
+    <!-- 15% = 3/4 garis bawah -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen">
+          <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
+          <div class="vent">
+            <div class="line"><div class="fill" style="width:75%"></div></div>
+            <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+          </div>
+          <div class="bezel"></div><div class="punch-hole"></div>
+        </div>
+      </div>
+      <div class="caption"><b>15%</b> = 3/4 garis bawah</div>
+    </div>
+
+    <!-- 20% = 1 garis bawah penuh -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen">
+          <img class="wallpaper" src="../assets/wallpapers/default_wallpaper.jpg?v=17" alt="Wallpaper">
+          <div class="vent">
+            <div class="line"><div class="fill" style="width:100%"></div></div>
+            <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+          </div>
+          <div class="bezel"></div><div class="punch-hole"></div>
+        </div>
+      </div>
+      <div class="caption"><b>20%</b> = 1 garis bawah penuh</div>
     </div>
   </div>
-  <div class="label">
-    <div class="label-title">Wallpaper Default — Tertutup Penuh</div>
-    <div class="label-sub">1224×2720 • Tanpa background putih • Mengisi penuh layar HP</div>
-  </div>
-  <div class="specs">
-    <span><span class="dot"></span> 163.7 × 75.8 mm</span>
-    <span><span class="dot"></span> Bezel Ultra-Thin</span>
-    <span><span class="dot"></span> Punch Hole Center</span>
+
+  <div class="legend">
+    <b>Sudah sesuai:</b> 5 garis <b>miring</b> di ventilasi kanan • <b>Isi dari bawah</b> → 5% = 1/4 garis bawah • 30% = 1 garis bawah + 1/2 garis kedua<br>
+    Kode Android juga isi dari bawah & miring sesuai ventilasi
   </div>
 </body>
 </html>
