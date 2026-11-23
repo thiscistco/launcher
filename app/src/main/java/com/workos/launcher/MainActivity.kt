@@ -72,7 +72,7 @@ fun BatteryIndicator(
     // Di ventilasi kanan - 5 garis miring ventilasi, tiap 5% = 1/4 garis, isi dari bawah, miring sesuai aslinya
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(2.dp),
+        verticalArrangement = Arrangement.spacedBy(2.4.dp),
         horizontalAlignment = Alignment.End
     ) {
         // Label persentase baterai (menggantikan HIGH PERFORMANCE) - di atas ventilasi
@@ -94,7 +94,7 @@ fun BatteryIndicator(
                 batteryPercent <= start -> 0f
                 else -> (batteryPercent - start) / 20f // 5%->0.25, 15%->0.75 bottom
             }
-            Canvas(modifier = Modifier.size(width = 6.13.dp, height = 10.5.dp)) {
+            Canvas(modifier = Modifier.size(width = 7.356.dp, height = 12.6.dp)) {
                 // Vertical end caps with diagonal sides, matching the preview's clipped parallelogram.
                 val capHeight = size.height * (3.2f / 10.5f)
                 val barPath = Path().apply {
