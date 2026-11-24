@@ -38,8 +38,8 @@ import java.util.*
 import kotlin.math.PI
 import kotlin.math.tan
 
-private const val BATTERY_BAR_SKEW_ANGLE_DEGREES = 51.0
-private const val BATTERY_OVERLAY_SHIFT_WALLPAPER_PX = 1f
+private const val BATTERY_BAR_SKEW_ANGLE_DEGREES = 52.0
+private const val BATTERY_OVERLAY_SHIFT_WALLPAPER_PX = 2f
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
