@@ -29,7 +29,7 @@
     context.scale(pixelRatio, pixelRatio);
 
     const chars = [...indicator.dataset.battery];
-    const dotSize = Math.min(labelHeight / 10, labelWidth / 30) * 0.95;
+    const dotSize = Math.min(labelHeight / 10, labelWidth / 30) * 0.9;
     const dotGap = dotSize * 0.5;
     const characterGap = dotSize * 0.8;
     const glyphWidth = dotSize * 3 + dotGap * 2;
