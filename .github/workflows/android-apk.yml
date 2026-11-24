@@ -53,9 +53,12 @@ jobs:
         if: failure()
         run: |
           if [ -f gradle-build.log ]; then
-            failure_lines="$(grep -E '(^FAILURE:|What went wrong:|Execution failed for task|Could not resolve|e: |error:)' gradle-build.log | tail -n 12 || true)"
+            failure_lines="$(sed -n '/^\* What went wrong:/,/^\* Try:/p' gradle-build.log | sed '$d' | head -n 36)"
             if [ -z "$failure_lines" ]; then
-              failure_lines="$(tail -n 25 gradle-build.log)"
+              failure_lines="$(grep -Ei 'requires.*compile|AAR metadata|metadata validation|Could not resolve|error:|Execution failed' gradle-build.log | tail -n 30 || true)"
+            fi
+            if [ -z "$failure_lines" ]; then
+              failure_lines="$(tail -n 40 gradle-build.log)"
             fi
             {
               echo '### Gradle build failure'
