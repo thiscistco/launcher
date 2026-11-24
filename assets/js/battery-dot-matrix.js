@@ -12,7 +12,7 @@
     "9": ["111", "101", "111", "001", "111"]
   };
   const blankGlyph = ["000", "000", "000", "000", "000"];
-  const labelWidth = 14.1;
+  const labelWidth = 11.8;
   const labelHeight = 12.7;
   const dotSizeHeightRatio = 0.053333333;
 

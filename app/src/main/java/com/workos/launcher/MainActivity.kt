@@ -140,7 +140,7 @@ fun BatteryIndicator(
         val batteryOverlayOffsetY = imageScale * BATTERY_OVERLAY_SHIFT_WALLPAPER_PX
         val skewSlope = tan(BATTERY_BAR_SKEW_ANGLE_DEGREES * PI / 180.0).toFloat()
 
-        val indicatorWidth = imageScale * 60f
+        val indicatorWidth = imageScale * 50f
         val indicatorHeight = imageScale * 54f
         val topBarTop = imageOffsetY + imageScale * slitCenterYs.first() +
             batteryOverlayOffsetY - barHeight / 2f
