@@ -18,10 +18,9 @@
   .wallpaper { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
   .bezel { position:absolute; inset:0; border-radius:22px; border:3px solid #000; pointer-events:none; z-index:5; }
   .punch-hole { position:absolute; top:9px; left:50%; transform:translateX(-50%); width:18px; height:18px; background:radial-gradient(circle at 30% 30%,#1a1a1a 0%,#000 60%); border-radius:50%; border:1px solid #222; z-index:6; }
-  /* Bar baterai UKURAN & KEMIRINGAN SESUAI 5 GARIS MIRING ASLI - persis ventilasi POWERTRAIN */
-  /* Each bar is positioned on one matching lower diagonal vent slit in wallpaper v17. */
-  .vent-battery { position:absolute; right:18.47px; top:0; width:10.353px; height:100%; z-index:7; }
-  .vent-line { position:absolute; left:0; width:10.353px; height:14.824px; background:#0a0a0a; overflow:hidden; clip-path:polygon(0 83.234%, 0 100%, 100% 16.766%, 100% 0); }
+  /* Battery bars match the Android overlay: 52° skew, shifted down 2 wallpaper pixels. */
+  .vent-battery { position:absolute; right:18.47px; top:0.07353%; width:10.353px; height:100%; z-index:7; }
+  .vent-line { position:absolute; left:0; width:10.353px; height:14.824px; background:#0a0a0a; overflow:hidden; clip-path:polygon(0 89.393%, 0 100%, 100% 10.607%, 100% 0); }
   .vent-line:nth-child(1) { top:52.692%; } /* slit paling bawah */
   .vent-line:nth-child(2) { top:50.885%; }
   .vent-line:nth-child(3) { top:49.041%; }
@@ -37,7 +36,7 @@
 <body>
   <div class="device-info">
     <h1>Infinix GT30 Pro — Launcher Preview :3000</h1>
-    <p>Setiap bar dipetakan tepat ke garis miring ventilasi POWERTRAIN pada wallpaper v17</p>
+    <p>Skew bar 52° · overlay baterai turun total 2 px pada koordinat wallpaper</p>
   </div>
 
   <div class="phones">
@@ -107,7 +106,7 @@
   </div>
 
   <div class="legend">
-    <b>POSISI DIKALIBRASI:</b> Tiap bar ditempatkan satu per satu tepat di atas garis miring ventilasi; ujung tetap vertikal dan isi baterai naik dari bar terbawah
+    <b>OVERLAY DIPERBARUI:</b> Skew 52° · turun 2 px dari posisi awal · isi baterai naik dari bar terbawah
   </div>
 </body>
 </html>
