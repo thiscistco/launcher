@@ -27,6 +27,7 @@
   .vent-line:nth-child(4) { top:47.216%; }
   .vent-line:nth-child(5) { top:45.335%; } /* slit paling atas */
   .battery-readout { position:absolute; left:50%; top:43.12%; transform:translateX(-50%); width:14.1px; height:12.7px; border-radius:2px; background:rgba(0,0,0,.88); z-index:2; }
+  .battery-triangle { position:absolute; left:50%; top:calc(43.12% + 12.7px); transform:translateX(-50%); width:4.23px; height:1.41px; background:#FF6A00; clip-path:polygon(0 0, 100% 0, 0 100%); z-index:2; }
   .vent-line .fill { position:absolute; top:0; bottom:0; left:0; background:#FF6A00; box-shadow:0 0 4px #FF6A00; }
   .caption { margin-top:10px; color:#888; font-size:11px; text-align:center; }
   .caption b { color:#FF6A00; }
@@ -46,7 +47,7 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="assets/wallpapers/default_wallpaper_modern.png?v=18-modern" alt="Wallpaper">
-          <div class="vent-battery" data-battery="5%">
+          <div class="vent-battery" data-battery="5">
             <div class="vent-line"><div class="fill" style="width:25%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
           </div>
@@ -61,7 +62,7 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="assets/wallpapers/default_wallpaper_modern.png?v=18-modern" alt="Wallpaper">
-          <div class="vent-battery" data-battery="15%">
+          <div class="vent-battery" data-battery="15">
             <div class="vent-line"><div class="fill" style="width:75%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
           </div>
@@ -76,7 +77,7 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="assets/wallpapers/default_wallpaper_modern.png?v=18-modern" alt="Wallpaper">
-          <div class="vent-battery" data-battery="40%">
+          <div class="vent-battery" data-battery="40">
             <div class="vent-line"><div class="fill" style="width:100%"></div></div>
             <div class="vent-line"><div class="fill" style="width:100%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
@@ -92,7 +93,7 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="assets/wallpapers/default_wallpaper_modern.png?v=18-modern" alt="Wallpaper">
-          <div class="vent-battery" data-battery="100%">
+          <div class="vent-battery" data-battery="100">
             <div class="vent-line"><div class="fill" style="width:100%"></div></div>
             <div class="vent-line"><div class="fill" style="width:100%"></div></div>
             <div class="vent-line"><div class="fill" style="width:100%"></div></div>

@@ -9,8 +9,7 @@
     "6": ["111", "100", "111", "101", "111"],
     "7": ["111", "001", "010", "010", "010"],
     "8": ["111", "101", "111", "101", "111"],
-    "9": ["111", "101", "111", "001", "111"],
-    "%": ["101", "001", "010", "100", "101"]
+    "9": ["111", "101", "111", "001", "111"]
   };
   const blankGlyph = ["000", "000", "000", "000", "000"];
   const labelWidth = 14.1;
@@ -23,13 +22,14 @@
     canvas.className = "battery-readout";
     canvas.width = Math.round(labelWidth * pixelRatio);
     canvas.height = Math.round(labelHeight * pixelRatio);
+    const batteryValue = indicator.dataset.battery;
     canvas.setAttribute("role", "img");
-    canvas.setAttribute("aria-label", `Battery ${indicator.dataset.battery}`);
+    canvas.setAttribute("aria-label", `Battery ${batteryValue}%`);
 
     const context = canvas.getContext("2d");
     context.scale(pixelRatio, pixelRatio);
 
-    const chars = [...indicator.dataset.battery];
+    const chars = [...batteryValue];
     const dotSize = labelHeight * dotSizeHeightRatio;
     const dotGap = dotSize * 0.5;
     const characterGap = dotSize * 0.8;
@@ -62,5 +62,10 @@
     });
 
     indicator.appendChild(canvas);
+
+    const triangle = document.createElement("span");
+    triangle.className = "battery-triangle";
+    triangle.setAttribute("aria-hidden", "true");
+    indicator.appendChild(triangle);
   });
 })();

@@ -53,8 +53,7 @@ private val LED_DOT_MATRIX_GLYPHS = mapOf(
     '6' to listOf("111", "100", "111", "101", "111"),
     '7' to listOf("111", "001", "010", "010", "010"),
     '8' to listOf("111", "101", "111", "101", "111"),
-    '9' to listOf("111", "101", "111", "001", "111"),
-    '%' to listOf("101", "001", "010", "100", "101")
+    '9' to listOf("111", "101", "111", "001", "111")
 )
 
 @Composable
@@ -143,12 +142,13 @@ fun BatteryIndicator(
         val indicatorHeight = imageScale * 54f
         val topBarTop = imageOffsetY + imageScale * slitCenterYs.first() +
             batteryOverlayOffsetY - barHeight / 2f
+        val indicatorTop = topBarTop - indicatorHeight - imageScale * 6f
 
         Box(
             modifier = Modifier
                 .offset(
                     x = slitCenterX - indicatorWidth / 2f,
-                    y = topBarTop - indicatorHeight - imageScale * 6f
+                    y = indicatorTop
                 )
                 .size(width = indicatorWidth, height = indicatorHeight)
                 .clip(RoundedCornerShape(imageScale * 8f))
@@ -156,9 +156,28 @@ fun BatteryIndicator(
             contentAlignment = Alignment.Center
         ) {
             LedDotMatrixText(
-                text = "$batteryPercent%",
+                text = batteryPercent.toString(),
                 modifier = Modifier.fillMaxSize()
             )
+        }
+
+        val triangleWidth = imageScale * 18f
+        val triangleHeight = imageScale * 6f
+        Canvas(
+            modifier = Modifier
+                .offset(
+                    x = slitCenterX - triangleWidth / 2f,
+                    y = indicatorTop + indicatorHeight
+                )
+                .size(width = triangleWidth, height = triangleHeight)
+        ) {
+            val triangle = Path().apply {
+                moveTo(0f, 0f)
+                lineTo(size.width, 0f)
+                lineTo(0f, size.height)
+                close()
+            }
+            drawPath(triangle, Color(0xFFFF6A00))
         }
 
         for (i in 0 until 5) {
