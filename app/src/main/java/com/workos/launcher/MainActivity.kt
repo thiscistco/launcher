@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
@@ -40,6 +41,57 @@ import kotlin.math.tan
 
 private const val BATTERY_BAR_SKEW_ANGLE_DEGREES = 52.0
 private const val BATTERY_OVERLAY_SHIFT_WALLPAPER_PX = 2f
+
+private val LED_DOT_MATRIX_GLYPHS = mapOf(
+    '0' to listOf("111", "101", "101", "101", "111"),
+    '1' to listOf("010", "110", "010", "010", "111"),
+    '2' to listOf("111", "001", "111", "100", "111"),
+    '3' to listOf("111", "001", "111", "001", "111"),
+    '4' to listOf("101", "101", "111", "001", "001"),
+    '5' to listOf("111", "100", "111", "001", "111"),
+    '6' to listOf("111", "100", "111", "101", "111"),
+    '7' to listOf("111", "001", "010", "010", "010"),
+    '8' to listOf("111", "101", "111", "101", "111"),
+    '9' to listOf("111", "101", "111", "001", "111"),
+    '%' to listOf("101", "001", "010", "100", "101")
+)
+
+@Composable
+private fun LedDotMatrixText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = Color(0xFFFF6A00)
+) {
+    val blankGlyph = listOf("000", "000", "000", "000", "000")
+    val glyphs = text.map { LED_DOT_MATRIX_GLYPHS[it] ?: blankGlyph }
+
+    Canvas(modifier = modifier) {
+        val dotSize = minOf(size.height / 8f, size.width / 24f)
+        val dotGap = dotSize * 0.5f
+        val characterGap = dotSize * 0.8f
+        val glyphWidth = dotSize * 3f + dotGap * 2f
+        val textWidth = glyphWidth * glyphs.size + characterGap * (glyphs.size - 1)
+        val textHeight = dotSize * 5f + dotGap * 4f
+        val startX = (size.width - textWidth) / 2f
+        val startY = (size.height - textHeight) / 2f
+
+        glyphs.forEachIndexed { characterIndex, glyph ->
+            glyph.forEachIndexed { rowIndex, row ->
+                row.forEachIndexed { columnIndex, dot ->
+                    if (dot == '1') {
+                        val center = Offset(
+                            x = startX + characterIndex * (glyphWidth + characterGap) +
+                                columnIndex * (dotSize + dotGap) + dotSize / 2f,
+                            y = startY + rowIndex * (dotSize + dotGap) + dotSize / 2f
+                        )
+                        drawCircle(color.copy(alpha = 0.22f), radius = dotSize * 0.85f, center = center)
+                        drawCircle(color, radius = dotSize * 0.42f, center = center)
+                    }
+                }
+            }
+        }
+    }
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,8 +138,8 @@ fun BatteryIndicator(
         val batteryOverlayOffsetY = imageScale * BATTERY_OVERLAY_SHIFT_WALLPAPER_PX
         val skewSlope = tan(BATTERY_BAR_SKEW_ANGLE_DEGREES * PI / 180.0).toFloat()
 
-        val indicatorWidth = imageScale * 120f
-        val indicatorHeight = imageScale * 54f
+        val indicatorWidth = imageScale * 104f
+        val indicatorHeight = imageScale * 48f
         val topBarTop = imageOffsetY + imageScale * slitCenterYs.first() +
             batteryOverlayOffsetY - barHeight / 2f
 
@@ -102,12 +154,9 @@ fun BatteryIndicator(
                 .background(Color.Black.copy(alpha = 0.88f)),
             contentAlignment = Alignment.Center
         ) {
-            Text(
+            LedDotMatrixText(
                 text = "$batteryPercent%",
-                fontSize = 8.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFFFF6A00),
-                letterSpacing = 0.5.sp
+                modifier = Modifier.fillMaxSize()
             )
         }
 

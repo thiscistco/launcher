@@ -26,7 +26,7 @@
   .vent-line:nth-child(3) { top:49.041%; }
   .vent-line:nth-child(4) { top:47.216%; }
   .vent-line:nth-child(5) { top:45.335%; } /* slit paling atas */
-  .vent-battery::before { content:attr(data-battery); position:absolute; left:50%; top:43.2%; transform:translateX(-50%); width:28px; height:13px; display:flex; align-items:center; justify-content:center; border-radius:2px; background:rgba(0,0,0,.88); color:#FF6A00; font-size:8px; font-weight:700; letter-spacing:.5px; white-space:nowrap; z-index:2; }
+  .battery-readout { position:absolute; left:50%; top:43.2%; transform:translateX(-50%); width:24px; height:11px; border-radius:2px; background:rgba(0,0,0,.88); z-index:2; }
   .vent-line .fill { position:absolute; top:0; bottom:0; left:0; background:#FF6A00; box-shadow:0 0 4px #FF6A00; }
   .caption { margin-top:10px; color:#888; font-size:11px; text-align:center; }
   .caption b { color:#FF6A00; }
@@ -37,7 +37,7 @@
 <body>
   <div class="device-info">
     <h1>Infinix GT30 Pro — Launcher Preview :3000</h1>
-    <p>Panel angka gelap di atas bar · skew 52° · turun total 2 px</p>
+    <p>Panel gelap LED dot matrix · skew bar 52° · turun total 2 px</p>
   </div>
 
   <div class="phones">
@@ -107,7 +107,9 @@
   </div>
 
   <div class="legend">
-    <b>INDIKATOR BATERAI:</b> Angka tampil pada panel gelap · skew bar 52° · isi naik dari bar terbawah
+    <b>INDIKATOR BATERAI:</b> Panel dipersempit · angka LED dot matrix · isi naik dari bar terbawah
   </div>
+
+  <script src="assets/js/battery-dot-matrix.js"></script>
 </body>
 </html>
