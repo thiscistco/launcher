@@ -165,10 +165,10 @@ fun HomeScreen(
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        // Wallpaper v17 - 1224x2720 440ppi - edge-to-edge
+        // Modern, camera-free v17 derivative - 1440x3200 with the original aspect ratio
         Image(
-            painter = painterResource(id = R.drawable.default_wallpaper_nolabels),
-            contentDescription = "GT30 Pro Wallpaper v17 without text labels",
+            painter = painterResource(id = R.drawable.default_wallpaper_modern),
+            contentDescription = "GT30 Pro modern wallpaper, no text or camera module",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )

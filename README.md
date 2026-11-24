@@ -4,9 +4,9 @@
 
 ### Wallpaper
 - **Locked source:** `assets/wallpapers/default_wallpaper.jpg` v17 (kept unchanged)
-- **Launcher default:** `assets/wallpapers/default_wallpaper_nolabels.png` (text removed; composition preserved)
-- **Resolution:** 1224×2720 • 440 ppi
-- **Design:** Cyber Mecha, orange X on carbon, LED bars, carbon border; all word labels removed
+- **Launcher default:** `assets/wallpapers/default_wallpaper_modern.png` (no labels or camera module)
+- **Resolution:** 1440×3200 • same v17 aspect ratio, with the five vent slits retained for battery alignment
+- **Design:** Cleaner graphite and polished titanium, crisp cyan circuitry, bright orange X; no rusty patina
 - **Preview:** `index.html` + `preview/index.html` — GT30 Pro 6.78" with bezel & punch hole
 
 ### Tech Stack
@@ -17,8 +17,8 @@
 ### Structure
 ```
 assets/wallpapers/default_wallpaper.jpg  # v17 locked source (unchanged)
-assets/wallpapers/default_wallpaper_nolabels.png  # label-free v17 launcher image
-app/src/main/res/drawable-nodpi/default_wallpaper_nolabels.jpg  # Android drawable
+assets/wallpapers/default_wallpaper_modern.png  # modern label- and camera-free launcher image
+app/src/main/res/drawable-nodpi/default_wallpaper_modern.jpg  # Android drawable
 app/src/main/java/com/workos/launcher/
   MainActivity.kt      # Home with wallpaper + parallax option
   SuperAppActivity.kt  # All-in-One productivity
