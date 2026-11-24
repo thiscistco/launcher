@@ -10,11 +10,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -31,11 +33,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.workos.launcher.ui.theme.WorkOSTheme
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.TextStyle
 import java.util.*
+import kotlinx.coroutines.delay
 import kotlin.math.PI
 import kotlin.math.tan
 
@@ -216,6 +223,152 @@ fun BatteryIndicator(
                             color = Color(0xFFFF6A00),
                             size = Size(width = size.width * fillFraction, height = size.height)
                         )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MiniCalendarOverlay(modifier: Modifier = Modifier) {
+    var today by remember { mutableStateOf(LocalDate.now()) }
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(60_000L)
+            today = LocalDate.now()
+        }
+    }
+
+    BoxWithConstraints(modifier = modifier) {
+        val imageScale = maxOf(maxWidth / 1224f, maxHeight / 2720f)
+        val imageOffsetX = (maxWidth - imageScale * 1224f) / 2f
+        val imageOffsetY = (maxHeight - imageScale * 2720f) / 2f
+        val yearMonth = YearMonth.from(today)
+        val locale = Locale("id", "ID")
+        val monthLabel = yearMonth.month.getDisplayName(TextStyle.SHORT, locale).uppercase(locale)
+        val firstDayOffset = yearMonth.atDay(1).dayOfWeek.value % 7
+        val weekCount = (firstDayOffset + yearMonth.lengthOfMonth() + 6) / 7
+
+        MiniCalendarPanel(
+            today = today,
+            monthLabel = monthLabel,
+            firstDayOffset = firstDayOffset,
+            weekCount = weekCount,
+            modifier = Modifier
+                .offset(
+                    x = imageOffsetX + imageScale * 591f,
+                    y = imageOffsetY + imageScale * 1853f
+                )
+                .size(width = imageScale * 255f, height = imageScale * 144.5f)
+        )
+    }
+}
+
+@Composable
+private fun MiniCalendarPanel(
+    today: LocalDate,
+    monthLabel: String,
+    firstDayOffset: Int,
+    weekCount: Int,
+    modifier: Modifier = Modifier
+) {
+    val daysInMonth = YearMonth.from(today).lengthOfMonth()
+    val weekdays = listOf("MIN", "SEN", "SEL", "RAB", "KAM", "JUM", "SAB")
+    val panelShape = RoundedCornerShape(6.dp)
+    val todayMarkerSize = if (weekCount == 6) 4.dp else 5.dp
+
+    Box(
+        modifier = modifier
+            .clip(panelShape)
+            .background(Color.Black.copy(alpha = 0.84f))
+            .border(0.8.dp, Color.White.copy(alpha = 0.42f), panelShape)
+            .padding(horizontal = 3.dp, vertical = 2.dp)
+    ) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            Row(
+                modifier = Modifier.height(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = monthLabel,
+                    fontSize = 7.sp,
+                    lineHeight = 8.sp,
+                    letterSpacing = 0.3.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFFFF6A00),
+                    maxLines = 1
+                )
+                Text(
+                    text = today.year.toString(),
+                    fontSize = 6.sp,
+                    lineHeight = 7.sp,
+                    color = Color.White.copy(alpha = 0.82f),
+                    maxLines = 1
+                )
+            }
+
+            Row(
+                modifier = Modifier.height(5.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                weekdays.forEach { weekday ->
+                    Text(
+                        text = weekday,
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Center,
+                        fontSize = 4.sp,
+                        lineHeight = 5.sp,
+                        color = Color.White.copy(alpha = 0.62f),
+                        maxLines = 1
+                    )
+                }
+            }
+
+            repeat(weekCount) { week ->
+                Row(modifier = Modifier.weight(1f)) {
+                    repeat(7) { weekdayIndex ->
+                        val day = week * 7 + weekdayIndex - firstDayOffset + 1
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxHeight(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            if (day in 1..daysInMonth) {
+                                if (day == today.dayOfMonth) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(todayMarkerSize)
+                                            .clip(CircleShape)
+                                            .background(Color(0xFFFF6A00)),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Text(
+                                            text = day.toString(),
+                                            fontSize = 4.sp,
+                                            lineHeight = 4.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color(0xFF141414),
+                                            maxLines = 1
+                                        )
+                                    }
+                                } else {
+                                    Text(
+                                        text = day.toString(),
+                                        fontSize = 4.sp,
+                                        lineHeight = 4.sp,
+                                        color = if (weekdayIndex == 0 || weekdayIndex == 6) {
+                                            Color.White.copy(alpha = 0.65f)
+                                        } else {
+                                            Color.White.copy(alpha = 0.92f)
+                                        },
+                                        maxLines = 1
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -444,6 +597,8 @@ fun HomeScreen(
                 )
             }
         }
+
+        MiniCalendarOverlay(modifier = Modifier.fillMaxSize())
     }
 }
 
