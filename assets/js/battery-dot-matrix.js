@@ -13,7 +13,7 @@
     "%": ["101", "001", "010", "100", "101"]
   };
   const blankGlyph = ["000", "000", "000", "000", "000"];
-  const labelWidth = 18.8;
+  const labelWidth = 14.1;
   const labelHeight = 12.7;
   const dotSizeHeightRatio = 0.053333333;
 
