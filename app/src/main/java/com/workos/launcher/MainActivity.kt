@@ -157,7 +157,7 @@ fun BatteryIndicator(
                 )
                 .size(width = indicatorWidth, height = indicatorHeight)
                 .clip(RoundedCornerShape(imageScale * 8f))
-                .background(Color.Black.copy(alpha = 0.88f)),
+                .background(Color.Black),
             contentAlignment = Alignment.Center
         ) {
             LedDotMatrixText(
