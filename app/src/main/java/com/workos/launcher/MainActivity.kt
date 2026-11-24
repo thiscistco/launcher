@@ -167,8 +167,8 @@ fun HomeScreen(
     Box(modifier = Modifier.fillMaxSize()) {
         // Wallpaper v17 - 1224x2720 440ppi - edge-to-edge
         Image(
-            painter = painterResource(id = R.drawable.default_wallpaper),
-            contentDescription = "GT30 Pro Wallpaper v17",
+            painter = painterResource(id = R.drawable.default_wallpaper_nolabels),
+            contentDescription = "GT30 Pro Wallpaper v17 without text labels",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )

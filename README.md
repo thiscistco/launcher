@@ -3,10 +3,11 @@
 **For Infinix GT30 Pro** — Transforms Gaming vibe → Professional Productivity
 
 ### Wallpaper
-- **Default:** `assets/wallpapers/default_wallpaper.jpg` v17
-- **Resolution:** 1224×2720 (1.5K) • 440 ppi • 787KB
-- **Design:** Transparent Cyber Mecha, X orange on carbon, LED bars, carbon border, no white bg
-- **Preview:** `index.html` + `preview/index.html` (localhost:3000) — GT30 Pro 6.78" with bezel & punch hole
+- **Locked source:** `assets/wallpapers/default_wallpaper.jpg` v17 (kept unchanged)
+- **Launcher default:** `assets/wallpapers/default_wallpaper_nolabels.png` (text removed; composition preserved)
+- **Resolution:** 1224×2720 • 440 ppi
+- **Design:** Cyber Mecha, orange X on carbon, LED bars, carbon border; all word labels removed
+- **Preview:** `index.html` + `preview/index.html` — GT30 Pro 6.78" with bezel & punch hole
 
 ### Tech Stack
 - **Kotlin + Jetpack Compose** (modern, Google recommended 2025-26)
@@ -15,7 +16,9 @@
 
 ### Structure
 ```
-assets/wallpapers/default_wallpaper.jpg  # v17 locked wallpaper
+assets/wallpapers/default_wallpaper.jpg  # v17 locked source (unchanged)
+assets/wallpapers/default_wallpaper_nolabels.png  # label-free v17 launcher image
+app/src/main/res/drawable-nodpi/default_wallpaper_nolabels.jpg  # Android drawable
 app/src/main/java/com/workos/launcher/
   MainActivity.kt      # Home with wallpaper + parallax option
   SuperAppActivity.kt  # All-in-One productivity
