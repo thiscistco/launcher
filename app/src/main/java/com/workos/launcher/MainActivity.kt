@@ -41,6 +41,7 @@ import kotlin.math.tan
 
 private const val BATTERY_BAR_SKEW_ANGLE_DEGREES = 52.0
 private const val BATTERY_OVERLAY_SHIFT_WALLPAPER_PX = 2f
+private const val LED_DOT_SIZE_HEIGHT_RATIO = 0.053333333f
 
 private val LED_DOT_MATRIX_GLYPHS = mapOf(
     '0' to listOf("111", "101", "101", "101", "111"),
@@ -66,7 +67,7 @@ private fun LedDotMatrixText(
     val glyphs = text.map { LED_DOT_MATRIX_GLYPHS[it] ?: blankGlyph }
 
     Canvas(modifier = modifier) {
-        val dotSize = minOf(size.height / 10f, size.width / 30f) * 0.9f
+        val dotSize = size.height * LED_DOT_SIZE_HEIGHT_RATIO
         val dotGap = dotSize * 0.5f
         val characterGap = dotSize * 0.8f
         val glyphWidth = dotSize * 3f + dotGap * 2f
@@ -138,7 +139,7 @@ fun BatteryIndicator(
         val batteryOverlayOffsetY = imageScale * BATTERY_OVERLAY_SHIFT_WALLPAPER_PX
         val skewSlope = tan(BATTERY_BAR_SKEW_ANGLE_DEGREES * PI / 180.0).toFloat()
 
-        val indicatorWidth = imageScale * 96f
+        val indicatorWidth = imageScale * 88f
         val indicatorHeight = imageScale * 54f
         val topBarTop = imageOffsetY + imageScale * slitCenterYs.first() +
             batteryOverlayOffsetY - barHeight / 2f
