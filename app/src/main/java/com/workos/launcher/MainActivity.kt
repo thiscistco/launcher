@@ -41,6 +41,8 @@ import kotlin.math.tan
 
 private const val BATTERY_BAR_SKEW_ANGLE_DEGREES = 52.0
 private const val BATTERY_OVERLAY_SHIFT_WALLPAPER_PX = 2f
+private const val BATTERY_PANEL_TO_BAR_GAP_WALLPAPER_PX = 6f
+private const val BATTERY_PANEL_LOWERING_WALLPAPER_PX = 2f
 private const val LED_DOT_SIZE_HEIGHT_RATIO = 0.053333333f
 
 private val LED_DOT_MATRIX_GLYPHS = mapOf(
@@ -142,7 +144,10 @@ fun BatteryIndicator(
         val indicatorHeight = imageScale * 54f
         val topBarTop = imageOffsetY + imageScale * slitCenterYs.first() +
             batteryOverlayOffsetY - barHeight / 2f
-        val indicatorTop = topBarTop - indicatorHeight - imageScale * 6f
+        val triangleHeight = imageScale * (
+            BATTERY_PANEL_TO_BAR_GAP_WALLPAPER_PX - BATTERY_PANEL_LOWERING_WALLPAPER_PX
+        )
+        val indicatorTop = topBarTop - indicatorHeight - triangleHeight
 
         Box(
             modifier = Modifier
@@ -162,7 +167,6 @@ fun BatteryIndicator(
         }
 
         val triangleWidth = imageScale * 18f
-        val triangleHeight = imageScale * 6f
         Canvas(
             modifier = Modifier
                 .offset(
@@ -177,7 +181,7 @@ fun BatteryIndicator(
                 lineTo(0f, size.height)
                 close()
             }
-            drawPath(triangle, Color(0xFFFF6A00))
+            drawPath(triangle, Color.Black)
         }
 
         for (i in 0 until 5) {
