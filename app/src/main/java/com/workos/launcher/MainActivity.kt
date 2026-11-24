@@ -66,7 +66,7 @@ private fun LedDotMatrixText(
     val glyphs = text.map { LED_DOT_MATRIX_GLYPHS[it] ?: blankGlyph }
 
     Canvas(modifier = modifier) {
-        val dotSize = minOf(size.height / 10f, size.width / 30f)
+        val dotSize = minOf(size.height / 10f, size.width / 30f) * 0.95f
         val dotGap = dotSize * 0.5f
         val characterGap = dotSize * 0.8f
         val glyphWidth = dotSize * 3f + dotGap * 2f
@@ -138,8 +138,8 @@ fun BatteryIndicator(
         val batteryOverlayOffsetY = imageScale * BATTERY_OVERLAY_SHIFT_WALLPAPER_PX
         val skewSlope = tan(BATTERY_BAR_SKEW_ANGLE_DEGREES * PI / 180.0).toFloat()
 
-        val indicatorWidth = imageScale * 104f
-        val indicatorHeight = imageScale * 48f
+        val indicatorWidth = imageScale * 96f
+        val indicatorHeight = imageScale * 54f
         val topBarTop = imageOffsetY + imageScale * slitCenterYs.first() +
             batteryOverlayOffsetY - barHeight / 2f
 

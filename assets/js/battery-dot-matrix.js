@@ -13,8 +13,8 @@
     "%": ["101", "001", "010", "100", "101"]
   };
   const blankGlyph = ["000", "000", "000", "000", "000"];
-  const labelWidth = 24;
-  const labelHeight = 11;
+  const labelWidth = 22.6;
+  const labelHeight = 12.7;
 
   document.querySelectorAll(".vent-battery[data-battery]").forEach((indicator) => {
     const canvas = document.createElement("canvas");
@@ -29,7 +29,7 @@
     context.scale(pixelRatio, pixelRatio);
 
     const chars = [...indicator.dataset.battery];
-    const dotSize = Math.min(labelHeight / 10, labelWidth / 30);
+    const dotSize = Math.min(labelHeight / 10, labelWidth / 30) * 0.95;
     const dotGap = dotSize * 0.5;
     const characterGap = dotSize * 0.8;
     const glyphWidth = dotSize * 3 + dotGap * 2;
