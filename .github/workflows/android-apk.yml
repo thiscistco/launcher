@@ -44,7 +44,37 @@ jobs:
           test -d "$ANDROID_HOME/build-tools/34.0.0"
 
       - name: Assemble debug APK
-        run: gradle --no-daemon --stacktrace assembleDebug
+        shell: bash
+        run: |
+          set -o pipefail
+          gradle --no-daemon --stacktrace --console=plain assembleDebug 2>&1 | tee gradle-build.log
+
+      - name: Summarize Gradle failure
+        if: failure()
+        run: |
+          if [ -f gradle-build.log ]; then
+            failure_lines="$(grep -E '(^FAILURE:|What went wrong:|Execution failed for task|Could not resolve|e: |error:)' gradle-build.log | tail -n 12 || true)"
+            if [ -z "$failure_lines" ]; then
+              failure_lines="$(tail -n 25 gradle-build.log)"
+            fi
+            {
+              echo '### Gradle build failure'
+              echo '```text'
+              printf '%s\n' "$failure_lines"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+            sanitized="$(printf '%s' "$failure_lines" | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g; s/::/%3A%3A/g')"
+            echo "::error title=Gradle build failure::${sanitized}"
+          fi
+
+      - name: Upload Gradle failure log
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-gradle-build-log
+          path: gradle-build.log
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v7
