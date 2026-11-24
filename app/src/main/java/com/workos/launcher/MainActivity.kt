@@ -1,7 +1,9 @@
 package com.workos.launcher
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.LauncherApps
+import android.os.BatteryManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -33,8 +35,11 @@ import androidx.compose.ui.unit.sp
 import com.workos.launcher.ui.theme.WorkOSTheme
 import java.text.SimpleDateFormat
 import java.util.*
-import android.content.IntentFilter
-import android.os.BatteryManager
+import kotlin.math.PI
+import kotlin.math.tan
+
+private const val BATTERY_BAR_SKEW_ANGLE_DEGREES = 51.0
+private const val BATTERY_OVERLAY_SHIFT_WALLPAPER_PX = 1f
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,12 +83,14 @@ fun BatteryIndicator(
         val slitCenterX = imageOffsetX + imageScale * 1123.5f
         // Ordered from top to bottom; the battery fills upward from the lowest slit.
         val slitCenterYs = listOf(1265f, 1316f, 1365.5f, 1415.5f, 1464.5f)
+        val batteryOverlayOffsetY = imageScale * BATTERY_OVERLAY_SHIFT_WALLPAPER_PX
+        val skewSlope = tan(BATTERY_BAR_SKEW_ANGLE_DEGREES * PI / 180.0).toFloat()
 
         Text(
             text = "$batteryPercent%",
             modifier = Modifier.offset(
                 x = slitCenterX - 18.dp,
-                y = imageOffsetY + imageScale * 1265f - barHeight / 2f - 10.dp
+                y = imageOffsetY + imageScale * 1265f + batteryOverlayOffsetY - barHeight / 2f - 10.dp
             ),
             fontSize = 8.sp,
             fontWeight = FontWeight.Bold,
@@ -101,14 +108,14 @@ fun BatteryIndicator(
                 else -> (batteryPercent - start) / 20f
             }
             val barLeft = slitCenterX - barWidth / 2f
-            val barTop = imageOffsetY + imageScale * slitCenterYs[i] - barHeight / 2f
+            val barTop = imageOffsetY + imageScale * slitCenterYs[i] + batteryOverlayOffsetY - barHeight / 2f
 
             Canvas(
                 modifier = Modifier
                     .offset(x = barLeft, y = barTop)
                     .size(width = barWidth, height = barHeight)
             ) {
-                val endCapHeight = size.height * (10.5628f / 63f)
+                val endCapHeight = size.height - size.width * skewSlope
                 val barPath = Path().apply {
                     moveTo(0f, size.height - endCapHeight)
                     lineTo(0f, size.height)
