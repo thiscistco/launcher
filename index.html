@@ -26,6 +26,7 @@
   .vent-line:nth-child(3) { top:49.041%; }
   .vent-line:nth-child(4) { top:47.216%; }
   .vent-line:nth-child(5) { top:45.335%; } /* slit paling atas */
+  .vent-battery::before { content:attr(data-battery); position:absolute; left:50%; top:43.2%; transform:translateX(-50%); width:28px; height:13px; display:flex; align-items:center; justify-content:center; border-radius:2px; background:rgba(0,0,0,.88); color:#FF6A00; font-size:8px; font-weight:700; letter-spacing:.5px; white-space:nowrap; z-index:2; }
   .vent-line .fill { position:absolute; top:0; bottom:0; left:0; background:#FF6A00; box-shadow:0 0 4px #FF6A00; }
   .caption { margin-top:10px; color:#888; font-size:11px; text-align:center; }
   .caption b { color:#FF6A00; }
@@ -36,7 +37,7 @@
 <body>
   <div class="device-info">
     <h1>Infinix GT30 Pro — Launcher Preview :3000</h1>
-    <p>Skew bar 52° · overlay baterai turun total 2 px pada koordinat wallpaper</p>
+    <p>Panel angka gelap di atas bar · skew 52° · turun total 2 px</p>
   </div>
 
   <div class="phones">
@@ -45,7 +46,7 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="assets/wallpapers/default_wallpaper_modern.png?v=18-modern" alt="Wallpaper">
-          <div class="vent-battery">
+          <div class="vent-battery" data-battery="5%">
             <div class="vent-line"><div class="fill" style="width:25%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
           </div>
@@ -60,7 +61,7 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="assets/wallpapers/default_wallpaper_modern.png?v=18-modern" alt="Wallpaper">
-          <div class="vent-battery">
+          <div class="vent-battery" data-battery="15%">
             <div class="vent-line"><div class="fill" style="width:75%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
           </div>
@@ -75,7 +76,7 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="assets/wallpapers/default_wallpaper_modern.png?v=18-modern" alt="Wallpaper">
-          <div class="vent-battery">
+          <div class="vent-battery" data-battery="40%">
             <div class="vent-line"><div class="fill" style="width:100%"></div></div>
             <div class="vent-line"><div class="fill" style="width:100%"></div></div>
             <div class="vent-line"></div><div class="vent-line"></div><div class="vent-line"></div>
@@ -91,7 +92,7 @@
       <div class="phone">
         <div class="screen">
           <img class="wallpaper" src="assets/wallpapers/default_wallpaper_modern.png?v=18-modern" alt="Wallpaper">
-          <div class="vent-battery">
+          <div class="vent-battery" data-battery="100%">
             <div class="vent-line"><div class="fill" style="width:100%"></div></div>
             <div class="vent-line"><div class="fill" style="width:100%"></div></div>
             <div class="vent-line"><div class="fill" style="width:100%"></div></div>
@@ -106,7 +107,7 @@
   </div>
 
   <div class="legend">
-    <b>OVERLAY DIPERBARUI:</b> Skew 52° · turun 2 px dari posisi awal · isi baterai naik dari bar terbawah
+    <b>INDIKATOR BATERAI:</b> Angka tampil pada panel gelap · skew bar 52° · isi naik dari bar terbawah
   </div>
 </body>
 </html>

@@ -86,17 +86,30 @@ fun BatteryIndicator(
         val batteryOverlayOffsetY = imageScale * BATTERY_OVERLAY_SHIFT_WALLPAPER_PX
         val skewSlope = tan(BATTERY_BAR_SKEW_ANGLE_DEGREES * PI / 180.0).toFloat()
 
-        Text(
-            text = "$batteryPercent%",
-            modifier = Modifier.offset(
-                x = slitCenterX - 18.dp,
-                y = imageOffsetY + imageScale * 1265f + batteryOverlayOffsetY - barHeight / 2f - 10.dp
-            ),
-            fontSize = 8.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFFFF6A00),
-            letterSpacing = 0.5.sp
-        )
+        val indicatorWidth = imageScale * 120f
+        val indicatorHeight = imageScale * 54f
+        val topBarTop = imageOffsetY + imageScale * slitCenterYs.first() +
+            batteryOverlayOffsetY - barHeight / 2f
+
+        Box(
+            modifier = Modifier
+                .offset(
+                    x = slitCenterX - indicatorWidth / 2f,
+                    y = topBarTop - indicatorHeight - imageScale * 6f
+                )
+                .size(width = indicatorWidth, height = indicatorHeight)
+                .clip(RoundedCornerShape(imageScale * 8f))
+                .background(Color.Black.copy(alpha = 0.88f)),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "$batteryPercent%",
+                fontSize = 8.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFFFF6A00),
+                letterSpacing = 0.5.sp
+            )
+        }
 
         for (i in 0 until 5) {
             val bottomIndex = 4 - i
