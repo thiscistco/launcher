@@ -66,7 +66,7 @@ private fun LedDotMatrixText(
     val glyphs = text.map { LED_DOT_MATRIX_GLYPHS[it] ?: blankGlyph }
 
     Canvas(modifier = modifier) {
-        val dotSize = minOf(size.height / 8f, size.width / 24f)
+        val dotSize = minOf(size.height / 10f, size.width / 30f)
         val dotGap = dotSize * 0.5f
         val characterGap = dotSize * 0.8f
         val glyphWidth = dotSize * 3f + dotGap * 2f
